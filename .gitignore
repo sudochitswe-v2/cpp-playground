@@ -1,0 +1,37 @@
+# Ignore all files by default (to catch executables without extensions)
+*
+
+# Do not ignore directories so Git can traverse them
+!*/
+
+# Keep source and header files
+!*.cpp
+!*.h
+!*.hpp
+!*.cc
+!*.cxx
+!*.c
+
+# Keep configurations and documentation
+!*.json
+!*.md
+!*.txt
+!.gitignore
+!.gitattributes
+
+# Keep IDE configurations
+!.vscode/
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/settings.json
+
+# Standard compiler output patterns just in case
+*.o
+*.obj
+*.out
+*.exe
+*.gch
+*.pch
+*.d
+*.dSYM/
+.DS_Store
