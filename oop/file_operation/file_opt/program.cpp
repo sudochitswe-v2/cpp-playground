@@ -20,8 +20,8 @@ void writeToFile(const string &filename, const string &content)
 
 void readFromFile(const string &filename)
 {
-    ifstream inFile(filename);
-    if (inFile.is_open()) ios::out
+    ifstream inFile(filename,ios::out);
+    if (inFile.is_open()) 
     {
         // string line;
         // while (getline(inFile, line)) {
