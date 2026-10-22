@@ -15,9 +15,12 @@ Tree* createTree(Tree* root,int data){
     if(root == NULL){
         return new Tree(data);
     }
-    if(data < root->data){
+    if(data <= root->data){
         root->left = createTree(root->left,data);
     }
+    // if(data == root->data){
+    //     root->left = createTree(root->left,data);
+    // }
     if(data > root->data){
         root->right = createTree(root->right,data);
     }
@@ -58,28 +61,58 @@ void postOrder(Tree* root){
     postOrder(root->right);
     cout<<root->data<<" ";
 }
-void sumOfNodes(Tree* root,int& sum){
+int sumOfNode(Tree* root){
     if(root == NULL){
-        return;
+        return 0;
     }
-    sum += root->data;
-    sumOfNodes(root->left,sum);
-    sumOfNodes(root->right,sum);
+    return root->data + sumOfNode(root->left) + sumOfNode(root->right);
+}
+int sumOfLeafNodes(Tree* root){
+    if(root == NULL){
+        return 0;
+    }
+    if(root->left == NULL && root->right == NULL){
+        return root->data;
+    }
+    return sumOfLeafNodes(root->left) + sumOfLeafNodes(root->right);
+}
+int sumOfNonLeafNodes(Tree* root){
+    if(root == NULL){
+        return 0;
+    }
+    if(root->left == NULL && root->right == NULL){
+        return 0;
+    }
+    return root->data + sumOfNonLeafNodes(root->left) + sumOfNonLeafNodes(root->right);
+}
+int height(Tree* root){
+    if(root == NULL){
+        return 0;
+    }
+    return 1 + max(height(root->left),height(root->right));
 }
 int main(){
     Tree* root = NULL;
-    for(int i=0;i<6;i++){
+    int n;
+    cin>>n;
+    for(int i=0;i<n;i++){
         int data;
         cin>>data;
         root = createTree(root,data);
     }
-    inOrder(root);
-    // vector<string> output;
-    // printTree(root,output,0);
-    // for(const string& s : output){
-    //     cout<<s<<endl;
-    // }
-    int sum = 0;
-    sumOfNodes(root,sum);
+    // inOrder(root);
+    cout << endl;
+    vector<string> output;
+    printTree(root,output,0);
+    for(const string& s : output){
+        cout<<s<<endl;
+    }
+    int sum = sumOfNode(root);
     cout<<"Sum of all nodes: "<<sum<<endl;
+    int leafSum = sumOfLeafNodes(root);
+    cout<<"Sum of leaf nodes: "<<leafSum<<endl;
+    int nonLeafSum = sumOfNonLeafNodes(root);
+    cout<<"Sum of non-leaf nodes: "<<nonLeafSum<<endl;
+    int h = height(root);
+    cout<<"Height of the tree: "<<h<<endl;
 }
