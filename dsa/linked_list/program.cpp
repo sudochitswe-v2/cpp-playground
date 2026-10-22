@@ -243,7 +243,8 @@ void isPalindrome(Node *head){
 int main()
 {
  
-    sumOfNodes();
+    int n;
+    
 
     return 0;
 }
