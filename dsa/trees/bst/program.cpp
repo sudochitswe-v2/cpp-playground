@@ -89,6 +89,12 @@ int height(Tree* root){
     if(root == NULL){
         return 0;
     }
+    if (root->left == nullptr)
+        return height(root->right) + 1;
+
+    if (root->right == nullptr)
+        return height(root->left) + 1;
+        
     return 1 + max(height(root->left),height(root->right));
 }
 int main(){
